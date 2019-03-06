@@ -129,15 +129,15 @@ class GKTag {
         if (action) {
             fileter.action = action;
         }
-        // if (targetType) {
-        //     fileter.targetType = targetType;
-        // }
-        // if (targetID) {
-        //     fileter.targetID = targetID;
-        // }
-        // if (targetOwnerUID) {
-        //     fileter.targetOwnerUID = targetOwnerUID;
-        // }
+        if (targetType) {
+            fileter.targetType = targetType;
+        }
+        if (targetID) {
+            fileter.targetID = targetID;
+        }
+        if (targetOwnerUID) {
+            fileter.targetOwnerUID = targetOwnerUID;
+        }
         let result = await vLog.find(fileter).limit(limit).skip(skip);
         console.log(result)
         return {data: result}
