@@ -1,0 +1,22 @@
+{
+  "apps": [
+    {
+      "name": "vlog-test.api",
+      "script": "./src/index.js",
+      "exec_mode": "cluster",
+      "max_memory_restart": "200M",
+      "cwd": "",
+      "instances": "1",
+      "env": {
+        "NODE_ENV": "test",
+        "NO_API_CACHE": 1,
+        "PORT": "8057",
+        "SQLPORT": "3306",
+        "SQL_PRINT": "0",
+        "REDIS_SESSION": 1
+      },
+      "error_file"      : "/data/pm2-logs/vlog_api/error.log",
+      "out_file"        : "/data/pm2-logs/vlog_api/out.log"
+    }
+  ]
+}
