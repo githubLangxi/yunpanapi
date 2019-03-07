@@ -49,6 +49,8 @@ let PanLogSchema=new schema(
         targetOwnerUID:{type:String},
         //请求的原始req头信息
         sourceHeaders:{type:String},
+        //事件的时间
+        time:{type:Date},
         //日志创建时间
         createTime:{type:Date}
     },

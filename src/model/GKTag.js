@@ -143,7 +143,7 @@ class GKTag {
         return {data: result}
     }
 
-    static async savevLog({sysName, sourceHeaders, userID, action, targetType, targetID, comment, targetOwnerUID}) {
+    static async savevLog({sysName, sourceHeaders, userID, action, targetType, targetID, comment, time,targetOwnerUID}) {
         //sysName
         //action
         //targetType
@@ -164,6 +164,7 @@ class GKTag {
             targetOwnerUID: targetOwnerUID,
             //请求的原始req头信息
             sourceHeaders: JSON.stringify(sourceHeaders),
+            time:new Date(time),
             //日志创建时间
             createTime: new Date()
         })
