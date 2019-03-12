@@ -4,7 +4,8 @@ import path from 'path'
 import _config from "./config.js" ;
 import {createServer} from 'class2api'
 import GKTag from './model/GKTag';
-
+import test from './model/test';
+//import TransferVLog from './jscomponent/TransferVLog';
 console.log(`global.config_path = ${global.config_path}`)
 let {redis} = _config
 
@@ -53,7 +54,7 @@ const afterCall = async ({req,res,result})=> {
 
 //创建微服务对象
 createServer({
-    modelClasses:[GKTag],
+    modelClasses:[GKTag,test],
     beforeCall,
     afterCall,
     config:{
