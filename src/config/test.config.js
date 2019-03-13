@@ -6,6 +6,7 @@ export const config = {
     frontPage:{
         site:'http://vlog-test.admin.gankao.com'
     },
+    DB_URL:'mongodb://panlog:panlog1221@10.9.106.10:27017/panLog',
     redis: {
         host: "10.9.193.140",
         port: 6379,

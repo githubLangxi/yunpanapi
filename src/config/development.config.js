@@ -6,6 +6,7 @@ export const config = {
     frontPage: {
         site: 'http://local.gankao.com:8009'
     },
+    DB_URL:'mongodb://panlog:panlog1221@localhost:27018/panLog',
     redis: {
         host: "127.0.0.1",
         port: 6379,
