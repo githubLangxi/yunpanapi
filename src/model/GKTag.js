@@ -7,7 +7,7 @@ class GKTag {
     constructor() {
         throw '静态业务功能类无法实例化'
     }
-    static async savevLogRelationsdic({action,userID,sysName,targetType,targetID,comment,targetOwnerUID,sourceHeaders}) {
+    static async savevLogRelationsdic({action,userID,sysName,targetType,targetID,comment,targetOwnerUID}) {
         setImmediate(async()=>{
             //sysName
             //action
@@ -28,8 +28,7 @@ class GKTag {
                 comment:comment,
                 //事物的归属用户ID（代操作时适用，比如后台管理员的操作）
                 targetOwnerUID:targetOwnerUID,
-                //请求的原始req头信息
-                sourceHeaders:sourceHeaders,
+
                 //事件的时间
                 time:new Date(),
 
@@ -169,6 +168,23 @@ class GKTag {
      */
     static async queryvLogs({duration,isProduction,sysName, userID, action, targetType, targetID, targetOwnerUID, pageindex=0,pagesize=30,starttime,endtime}) {
 
+        let newstarttime=new Date();
+        let newendtime=new Date();
+        if(!duration){
+            duration="日";
+        }
+        if(!starttime){
+            newstarttime=new Date();
+        }
+        else{
+            newstarttime=new Date(starttime)
+        }
+        if(!endtime){
+            newendtime= new Date(newstarttime-7*24*3600*1000);;
+        }else{
+            newendtime=new Date(endtime)
+        }
+
         let limit=pagesize;
         let skip=pagesize*pageindex;
         let fileter = {}
@@ -193,7 +209,7 @@ class GKTag {
         if (targetOwnerUID) {
             fileter.targetOwnerUID = targetOwnerUID;
         }
-        fileter.time={$gte: new Date(starttime), $lt:new Date(endtime)}
+        fileter.time={$gte: newstarttime, $lt:newendtime}
         let group={}
 
         if(duration=="日")
@@ -231,6 +247,12 @@ class GKTag {
             //sysName
             //action
             //targetType
+            var times;
+            if(!time){
+                times=new Date();
+            }else {
+                times=new Date(time);
+            }
             let newvLog = new vLog({
                 //行为所在的系统名称（二级域名名称，如wx、lubo、order等）
                 sysName: sysName,
@@ -248,7 +270,7 @@ class GKTag {
                 targetOwnerIdentifier: targetOwnerIdentifier,
                 //请求的原始req头信息
                 sourceHeaders: JSON.stringify(sourceHeaders),
-                time:new Date(time),
+                time:times,
                 isProduction:isProduction,
                 //日志创建时间
                 createTime: new Date()
