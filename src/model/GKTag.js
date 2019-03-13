@@ -265,11 +265,11 @@ class GKTag {
             }
 
             let filterresult = await vLogRelations.find(fileter);
-            if(filterresult && filterresult.length>0) {
+            //if(filterresult && filterresult.length>0) {
                 //对实例化的内容进行保存
                 let result = await newvLog.save()
                 let success = (result !== null)
-            }
+           // }
         })
         return {success:true}
     }
