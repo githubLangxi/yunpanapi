@@ -2,9 +2,9 @@ var mongoose=require('mongoose')
 
 //import DB_URL from './../config/'
 //数据库连接地址  链接到myStudent数据库
-//var DB_URL='mongodb://panlog:panlog1221@localhost:27018/panLog'
+var DB_URL='mongodb://panlog:panlog1221@localhost:27018/panLog'
 //var DB_URL='mongodb://panlog:panlog1221@10.9.106.10:27017/panLog'
-var DB_URL='mongodb://panlog:panlog1221@10.9.107.130:27017/panLog'
+//var DB_URL='mongodb://panlog:panlog1221@10.9.107.130:27017/panLog'
 
 
 //数据库连接
@@ -63,24 +63,24 @@ let PanLogSchema=new schema(
     {
         //设置信息的数据格式
         //行为所在的系统名称（二级域名名称，如wx、lubo、order等）
-        sysName:{type:String},
+        sysName:{type:String, default: ''},
         //发起行为的用户UID
-        userIdentifier:{type:String},
+        userIdentifier:{type:String,default: ''},
         //行为操作，可以理解为Event事件类型
-        action:{type:String},
+        action:{type:String,default: ''},
         //事物类型
-        targetType:{type:String},
+        targetType:{type:String,default: ''},
         //事物ID
-        targetID:{type:String},
+        targetID:{type:String,default: ''},
         //备注
-        extraInfo:{type:String},
+        extraInfo:{type:Object,default: {}},
         //事物的归属用户ID（代操作时适用，比如后台管理员的操作）
-        targetOwnerIdentifier:{type:String},
+        targetOwnerIdentifier:{type:String,default: ''},
         //请求的原始req头信息
-        sourceHeaders:{type:String},
+        sourceHeaders:{type:Object,default: ''},
         //事件的时间
         time:{type:Date},
-        isProduction:{type:Number},
+        isProduction:{type:Number,default: 1},
         //日志创建时间
         createTime:{type:Date}
     },
