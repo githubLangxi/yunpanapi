@@ -21,7 +21,7 @@
     "babel-plugin-module-resolver": "^3.1.1",
     "bluebird": "^3.4.0",
     "chai": "^4.2.0",
-    "class2api": "^3.3.26",
+    "class2api": "3.3.27",
     "copy-webpack-plugin": "^4.5.1",
     "express": "^4.16.2",
     "isomorphic-fetch": "^2.2.1",

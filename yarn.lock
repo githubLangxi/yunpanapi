@@ -1834,10 +1834,10 @@ class-utils@^0.3.5:
     isobject "^3.0.0"
     static-extend "^0.1.1"
 
-class2api@^3.3.26:
-  version "3.3.26"
-  resolved "http://registry.npm.taobao.org/class2api/download/class2api-3.3.26.tgz#ec5de1a675c9d2c5c737869600ced82ab4c4d278"
-  integrity sha1-7F3hpnXJ0sXHN4aWAM7YKrTE0ng=
+class2api@3.3.27:
+  version "3.3.27"
+  resolved "http://registry.npm.taobao.org/class2api/download/class2api-3.3.27.tgz#61f962ac5ad40bff64abe3cc959799738d1f3d84"
+  integrity sha1-YflirFrUC/9kq+PMlZeZc40fPYQ=
   dependencies:
     babel-runtime "^6.5.0"
     bluebird "^3.4.0"

@@ -1,8 +1,8 @@
 var mongoose=require('mongoose')
 
-//import DB_URL from './../config/'
+import DB_URL1 from './../config'
 //数据库连接地址  链接到myStudent数据库
-var DB_URL='mongodb://panlog:panlog1221@localhost:27018/panLog'
+var DB_URL=DB_URL1.DB_URL;
 //var DB_URL='mongodb://panlog:panlog1221@10.9.106.10:27017/panLog'
 //var DB_URL='mongodb://panlog:panlog1221@10.9.107.130:27017/panLog'
 
