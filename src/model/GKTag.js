@@ -7,7 +7,7 @@ class GKTag {
     constructor() {
         throw '静态业务功能类无法实例化'
     }
-    static async savevLogRelationsdic({action,userID,sysName,targetType,targetID,comment,targetOwnerUID}) {
+    static async savevLogRelationsdic({action,userID,sysName,targetType,targetID,targetOwnerUID}) {
         setImmediate(async()=>{
             //sysName
             //action
@@ -24,8 +24,7 @@ class GKTag {
                 targetType:targetType,
                 //事物ID
                 targetID:targetID,
-                //备注
-                comment:comment,
+
                 //事物的归属用户ID（代操作时适用，比如后台管理员的操作）
                 targetOwnerUID:targetOwnerUID,
 
@@ -268,7 +267,7 @@ class GKTag {
                 //事物的归属用户ID（代操作时适用，比如后台管理员的操作）
                 targetOwnerIdentifier: targetOwnerIdentifier,
                 //请求的原始req头信息
-                sourceHeaders: JSON.stringify(sourceHeaders),
+                sourceHeaders: sourceHeaders,
                 time:times,
                 isProduction:isProduction,
                 //日志创建时间
