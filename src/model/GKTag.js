@@ -180,15 +180,23 @@ class GKTag {
             duration="日";
         }
         if(!starttime){
-            newstarttime=new Date();
+            newstarttime=new Date((new Date()).getFullYear()+"-"+(  parseInt(new Date().getMonth())+1)+"-"+(parseInt(new Date().getDate())+2));
+            console.log((new Date()).getFullYear()+"-"+parseInt(new Date().getMonth())+1+"-"+parseInt(new Date().getDate())+2);
+            console.log((new Date()).getFullYear()+"-"+(  parseInt(new Date().getMonth())+1)+"-"+(parseInt(new Date().getDate())+2))
+            console.log(newstarttime);
+            newstarttime=new Date((new Date()).getFullYear()+"-"+(  parseInt(new Date().getMonth())+1)+"-"+(parseInt(new Date().getDate())-6))
+
+            //console.log(new Date(new Date(newstarttime)+8*3600*1000).toLocaleDateString())
         }
         else{
-            newstarttime=new Date(starttime)
+
+            newstarttime=new Date(new Date(starttime)+8*3600*1000)
         }
         if(!endtime){
-            newendtime= new Date(newstarttime-7*24*3600*1000);;
+            newendtime= new Date((new Date()).getFullYear()+"-"+(  parseInt(new Date().getMonth())+1)+"-"+(parseInt(new Date().getDate())+2));
+            // console.log(new Date(newendtime-7*24*3600*1000+8*3600*1000).toLocaleDateString())
         }else{
-            newendtime=new Date(endtime)
+            newendtime=new Date(new Date(endtime)+8*3600*1000)
         }
 
         let limit=pagesize;
@@ -228,6 +236,7 @@ class GKTag {
         }else {
             group = {_id: {year: "$year"}, count: {$sum: 1}}
         }
+        console.log(fileter)
         let result1=await  vLog.aggregate([
             {$match: fileter},
             // {$group: {: "$", total: {$sum: "$num"}}}
@@ -243,7 +252,7 @@ class GKTag {
 
         ]).group(group)
         console.log("result1"+JSON.stringify(result1));
-
+console.log({limit,skip})
         let result2 = await vLog.find(fileter).limit(limit).skip(skip);
         console.log("result2"+JSON.stringify(result2));
         return {data: {report:result1,list:result2}}
