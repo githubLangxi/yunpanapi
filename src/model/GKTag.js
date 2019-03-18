@@ -55,6 +55,14 @@ class GKTag {
         return {success:true}
 
     }
+    static async queryLogRelationsdic({pagesize=30,pageindex=0}) {
+        let limit=pagesize;
+        let skip=pagesize*pageindex;
+        let result = await vLogRelations.find({}).limit(limit).skip(skip);
+        console.log(result)
+        return {data: result}
+
+    }
 
     static async queryactiondics({pagesize=30,pageindex=0}) {
         let limit=pagesize;
@@ -241,6 +249,10 @@ class GKTag {
         return {data: {report:result1,list:result2}}
     }
     static async savevLog({isProduction,sysName, sourceHeaders, userIdentifier, action, targetType, targetID, extraInfo, time,targetOwnerIdentifier}) {
+        if((typeof sourceHeaders)!=="object" || (typeof extraInfo)!=="object")
+        {
+            return {success:false}
+        }
         setImmediate(async()=>{
             //sysName
             //action
