@@ -41,9 +41,9 @@ let Relationschema=new schema({
     //发起行为的用户UID
     userIdentifier:{type:String},
     //行为操作，可以理解为Event事件类型
-    action:{type:String},
+    action:{type:String, unique: true},
     //事物类型
-    targetType:{type:String},
+    targetType:{type:String, unique: true},
     //事物ID
     targetID:{type:String},
     //备注
@@ -55,6 +55,90 @@ let Relationschema=new schema({
     //事件的时间
     time:{type:Date},
     isProduction:{type:Number},
+    //日志创建时间
+    createTime:{type:Date}
+
+})
+let fileSchema=new schema(
+    {
+        //上传人
+        uid :{type:String, default: ''},
+        //0-试卷，讲义，学案，教案
+        type :{type:Number, default: 0},
+//隶属于某个专属类目的，例如《教材一加一》，例如是来自某本书的课件
+        father  :{type:schema.Types.ObjectId,ref: 'menu'},
+        // 0-公开，1-私有仅限老师自己使用
+        private:{type:Number, default: 0},
+
+      //  title :{type:String, default: '',   unique: true},
+        //标记的标题(默认为文件原始文件名)
+        title :{type:String, default: ''},
+        //文件大小，单位：字节
+        filesize :{type:String, default: ''},
+        //文件名原始名字
+        filename :{type:String, default: ''},
+        //文件类型：0未知，1-DOC，2-PPT，3-PDF，4-ZIP，5-图片，
+        filetype :{type:Number, default: 0},
+        //浏览次数
+        viewed  :{type:Number, default: 0},
+        //下载次数
+        downloaded   :{type:Number, default: 0},
+        //浏览次数
+        shared   :{type:Number, default: 0},
+        //缩略图
+        thumb  :{type:String, default: ''},
+        //版本：人教版/沪教版
+        version  :{type:String, default: ''},
+        //年级
+        grade   :{type:String, default: ''},
+        //科目
+        subject   :{type:String, default: ''},
+
+
+        Remarks:{type:String},
+
+        //更新时间
+        updated  :{type:Date},
+        //上传时间
+        createTime:{type:Date,default:new Date()}
+    },
+
+    {
+        versionKey:false
+    }
+)
+
+//文档菜单Schema
+let entitychema=new schema({
+    parentMenuId:{type:schema.Types.ObjectId},
+    name:{type:String},
+
+    icon:{type:String},
+
+    alias:{type:String},
+
+    state:{type:String},
+    sort:{type:Number},
+    value:{type:String},
+
+    type:{type:String},
+    Remarks:{type:String},
+    discription:{type:String},
+
+    createUserId:{type:Number},
+    //事件的时间
+    time:{type:Date},
+
+    //日志创建时间
+    createTime:{type:Date}
+
+})
+let Menuschema=new schema({
+
+    childs:[{type: schema.Types.ObjectId, ref: 'menu'}],
+
+    entity:{type:entitychema},
+    Remarks:{type:String},
     //日志创建时间
     createTime:{type:Date}
 
@@ -95,9 +179,14 @@ let sysNamedic=mongoose.model('sysNamedic',sysNameSchema)
 let actiondic=mongoose.model('actiondic',actionSchema)
 let targetTypedic=mongoose.model('targetTypedic',targetTypeSchema)
 let vLogRelations=mongoose.model('vLogRelation',Relationschema)
+let menu=mongoose.model('menu',Menuschema)
+let file=mongoose.model('file',fileSchema)
 
 
 //将PanLog的model导出
+
+module.exports.file=file
+module.exports.menu=menu
 module.exports.vLog=PanLog
 module.exports.vLogRelations=vLogRelations
 module.exports.sysNamedic=sysNamedic
